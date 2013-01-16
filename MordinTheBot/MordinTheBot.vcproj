@@ -485,23 +485,39 @@
 				<Filter
 					Name="MyWekaCore"
 					>
-					<File
-						RelativePath=".\Instance.h"
-						>
-					</File>
 					<Filter
 						Name="Attribute"
 						>
 						<File
+							RelativePath=".\Attribute.cpp"
+							>
+						</File>
+						<File
 							RelativePath=".\Attribute.h"
 							>
 						</File>
+					</Filter>
+					<Filter
+						Name="Instance"
+						>
 						<File
-							RelativePath=".\NumericAttribute.h"
+							RelativePath=".\Instance.cpp"
 							>
 						</File>
 						<File
-							RelativePath=".\StringAttribute.h"
+							RelativePath=".\Instance.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="Instances"
+						>
+						<File
+							RelativePath=".\Instances.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\Instances.h"
 							>
 						</File>
 					</Filter>

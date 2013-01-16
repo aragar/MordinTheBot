@@ -1,11 +1,11 @@
 #include "Instances.h"
 
-Instances::Instances(char* relationName, vector<Attribute*>& attributes, int capacity = 0)
+Instances::Instances(char* relationName, std::vector<Attribute*>& attributes, int capacity = 0)
 : relationName(relationName),
 attributes(attributes),
 classIndex(-1)
 {
-	instances = std::vector<Instance*>(capacity);
+	instances.reserve(capacity);
 }
 
 Instances::Instances(Instances* dataset)
@@ -33,7 +33,24 @@ Attribute* Instances::getAttribute(char* name)
 	return NULL;
 }
 
-/* Returns the last instance in the set. */
+/* Returns the index of the given attribute in the set of attributes. If there is more
+ * than one attribute with the same name, it return the first one. Returns -1 if the attribute
+ * can't be found. */
+int Instances::getAttributeIndex(Attribute* attribute)
+{
+	int index = 0;
+
+	for (std::vector<Attribute*>::iterator it = attributes.begin(); it != attributes.end(); ++it)
+	{
+		if (attribute == (*it))
+			return index;
+
+		++index;
+	}
+
+	return -1;
+}
+
 Instance* Instances::getLastInstance()
 {
 	int len = numInstances();
@@ -41,20 +58,9 @@ Instance* Instances::getLastInstance()
 	return instances[len-1];
 }
 
-/* Sets the class attribute. */
 void Instances::setClass(Attribute attribute)
 {
-	int classIndex = 0;
-	for (std::vector<Attribute*>::iterator it = attributes.begin(); it != attributes.end(); ++it)
-	{
-		if (attribute == (*it))
-		{	
-			this->classIndex = classIndex;
-			return
-		}
-
-		++classIndex;
-	}
+	classIndex = getAttributeIndex(attribute);
 
 	return;
 };
@@ -129,9 +135,9 @@ void Instances::insertAttributeAt(Attribute* attribute, int position)
 
 /* Returns the dataset as a string in ARFF format. 
  * Strings are quoted if they contain whitespace characters. */
-string Instances::toString()
+std::string Instances::toString()
 {
-	string s("@data\n");
+	std::string s("@data\n");
 
 	for (std::vector<Instance*>::iterator it = instances.begin(); it != instances.end(); ++it)
 		s += (*it)->toString() + "\n";

@@ -3,4 +3,7 @@ Moridin The Bot
 
 
 Implemented
-* Finite State Machine;
+* Finite State Machine (Not in project);
+* Attribute (NOMINAL and NUMERIC) -> (like WEKA);
+* Instance -> (like WEKA);
+* Instances -> (like WEKA);

@@ -1,5 +1,4 @@
 #include "Attribute.h"
-#include <cstring>
 
 Attribute::Attribute()
 {};
@@ -10,7 +9,7 @@ type(type),
 weight(weight)
 {};
 
-Attribute::Attribute(char* name, int type, vector<char*> values, double weight = 1.0)
+Attribute::Attribute(char* name, int type, std::vector<char*> values, double weight = 1.0)
 : name(name),
 type(type),
 values(values),
@@ -64,9 +63,9 @@ int Attribute::numValues()
 }
 
 /* Returns the attribute as a string in ARFF format. */
-string Attribute::toString()
+std::string Attribute::toString()
 {
-	string s("@attribute ");
+	std::string s("@attribute ");
 	
 	if (strchr(name, ' ') != NULL)
 		s += "\"" + name + "\"";
@@ -122,4 +121,25 @@ bool Attribute::operator==(Attribute* other)
 	}
 
 	return true;
+}
+
+/* Returns the index of the given value if the attribute is nominal.
+ * If the attribute is not nominal, or the value is not found, -1 will
+ * be returned. If more of one value are existing, the index of the 
+ * first will be returned. */
+int Attribute::getValueIndex(char* value)
+{
+	if (type != NOMINAL)
+		return -1;
+
+	int index = 0;
+	for (std::vector<char*>::iterator it = values.begin(); it != values.end(); ++it)
+	{
+		if (strcmp((*it), value) == 0)
+			return index;
+		
+		++index;
+	}
+
+	return -1;
 }
