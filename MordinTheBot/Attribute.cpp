@@ -54,11 +54,16 @@ bool Attribute::isString()
 	return type == Attribute::STRING;
 }
 
+/* Returns the number values. Returns 1 if the attribute is not nominal. */
 int Attribute::numValues()
 {
+	if (type != NOMINAL)
+		return 1;
+
 	return values.size();
 }
 
+/* Returns the attribute as a string in ARFF format. */
 string Attribute::toString()
 {
 	string s("@attribute ");
@@ -86,4 +91,35 @@ string Attribute::toString()
 	}
 
 	return s;
+}
+
+/* Returns true if the `other` attribute is equal to the current. */
+bool Attribute::operator==(Attribute* other)
+{
+	if (other == NULL)
+		return false;
+
+	if (strcmp(name, other->getName()) != 0)
+		return false;
+
+	if (type != other->getType())
+		return false;
+
+	if (weight != other->getWeight())
+		return false;
+ 
+	if (type == NOMINAL)
+	{
+		if (values.size() != other->getValues.size())
+			return false;
+
+		for (std::vector<char*>::iterator it1 = values.begin(), it2 = other->getValues.begin();
+				it1 != values.end(); ++it1, ++it2)
+		{
+			if (strcmp((*it1), (*it2)) != 0)
+				return false;
+		}
+	}
+
+	return true;
 }

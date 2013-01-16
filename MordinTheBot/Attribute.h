@@ -4,11 +4,11 @@
 class Attribute
 {
 private:
-	char* name;
-	int type;
-	double weight;
+	char*	name;
+	int		type;
+	double	weight;
 
-	vector<char*> values;
+	std::vector<char*> values;
 public:
 	static const enum {NUMERIC, NOMINAL, STRING};
 
@@ -34,4 +34,5 @@ public:
 	int		indexOfValue	(char* value);
 	int		numValues		();
 	string	toString		();
+	bool	operator==		(Instance* other);
 };
