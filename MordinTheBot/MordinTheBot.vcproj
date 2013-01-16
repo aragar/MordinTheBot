@@ -476,6 +476,38 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="CBR"
+			>
+			<Filter
+				Name="Fundamental"
+				>
+				<Filter
+					Name="MyWekaCore"
+					>
+					<File
+						RelativePath=".\Instance.h"
+						>
+					</File>
+					<Filter
+						Name="Attribute"
+						>
+						<File
+							RelativePath=".\Attribute.h"
+							>
+						</File>
+						<File
+							RelativePath=".\NumericAttribute.h"
+							>
+						</File>
+						<File
+							RelativePath=".\StringAttribute.h"
+							>
+						</File>
+					</Filter>
+				</Filter>
+			</Filter>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
