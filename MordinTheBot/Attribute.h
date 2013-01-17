@@ -17,7 +17,7 @@ public:
 	// Constructors
 	Attribute(char* name);
 	Attribute(char* name, int type, double weight = 1.0);
-	Attribute(char* name, int type, std::vector<char*> values, double weight = 1.0);
+	Attribute(char* name, int type, std::vector<char*>& values, double weight = 1.0);
 
 	// Getters
 	char*				getName();

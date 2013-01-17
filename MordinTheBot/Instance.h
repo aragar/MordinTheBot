@@ -48,7 +48,8 @@ public:
 	void		insertAttribute	(int position);
 	void		removeValueAt	(int position);
 	void		insertValueAt	(int position);
-	int			numAttributes		();
-	int			numValues			();
-	std::string	toString			();
+	int			numAttributes	();
+	int			numValues		();
+	std::string	toString		();
+	bool		hasDataset		();
 };

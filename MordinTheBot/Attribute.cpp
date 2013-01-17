@@ -22,7 +22,7 @@ weight(weight)
 /* Creates an attribute with given name, type, and weight. The given values are
  * set as possible for the attribute.
  * If the type is not nominal, the values won't be considered further. */
-Attribute::Attribute(char* name, int type, std::vector<char*> values, double weight)
+Attribute::Attribute(char* name, int type, std::vector<char*>& values, double weight)
 : name(name),
 type(type),
 values(values),

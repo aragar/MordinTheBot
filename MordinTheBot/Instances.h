@@ -28,7 +28,7 @@ public:
 	Attribute*				getClassAttribute	();
 	int						getClassIndex		();
 	std::vector<Instance*>	getInstances		();
-	Instance*				getfirstInstance	();
+	Instance*				getFirstInstance	();
 	Instance*				getInstance			(int index);
 	Instance*				getLastInstance		();
 	char*					getRelationName		();

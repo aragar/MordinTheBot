@@ -157,10 +157,38 @@
 	<References>
 	</References>
 	<Files>
-		<File
-			RelativePath=".\test.cpp"
+		<Filter
+			Name="MyWekaCoreTest"
 			>
-		</File>
+			<File
+				RelativePath="..\MordinTheBot\Attribute.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\MordinTheBot\Attribute.h"
+				>
+			</File>
+			<File
+				RelativePath="..\MordinTheBot\Instance.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\MordinTheBot\Instance.h"
+				>
+			</File>
+			<File
+				RelativePath="..\MordinTheBot\Instances.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\MordinTheBot\Instances.h"
+				>
+			</File>
+			<File
+				RelativePath=".\WekaCoreTest.cpp"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

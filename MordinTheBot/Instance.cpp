@@ -27,6 +27,8 @@ weight(1.0)
 		numAttributes = 0;
 
 	values.reserve(numAttributes);
+	for (int i = 0; i < numAttributes; ++i)
+		values.push_back(0);
 }
 
 /* Returns the attribute with the given index. */
@@ -251,4 +253,10 @@ std::string Instance::toString()
 	}
 
 	return s;
+}
+
+/* Returns true if the instance is bound to a dataset. */
+bool Instance::hasDataset()
+{
+	return dataset != NULL;
 }

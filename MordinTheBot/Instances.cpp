@@ -87,7 +87,7 @@ std::vector<Instance*> Instances::getInstances()
 }
 
 /* Returns the first instance of the dataset. */
-Instance* Instances::getfirstInstance()
+Instance* Instances::getFirstInstance()
 {
 	return getInstance(0);
 }
@@ -141,7 +141,7 @@ void Instances::setRelationName(char* newRelationName)
 void Instances::add(Instance* instance)
 {
 	Instance* result = new Instance(instance);
-	result->setDataset(instance->getDataset());
+	result->setDataset(this);
 	
 	instances.push_back(result);
 
