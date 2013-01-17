@@ -1,38 +1,105 @@
 #include "Attribute.h"
 
-Attribute::Attribute()
-{};
+/* Creates a numeric attribute with the given name. */
+Attribute::Attribute(char* name)
+: name(name),
+type(NUMERIC),
+weight(1.0)
+{
+	values.clear();
+}
 
-Attribute::Attribute(CHAR* name, int type, double weight = 1.0)
+/* Createes an attribute with the given name, type, and weight.
+ * If the attribute is nominal, it would have empty list of values. */
+Attribute::Attribute(char* name, int type, double weight)
 : name(name),
 type(type), 
 weight(weight)
-{};
+{
+	values.clear();
+}
 
-Attribute::Attribute(char* name, int type, std::vector<char*> values, double weight = 1.0)
+/* Creates an attribute with given name, type, and weight. The given values are
+ * set as possible for the attribute.
+ * If the type is not nominal, the values won't be considered further. */
+Attribute::Attribute(char* name, int type, std::vector<char*> values, double weight)
 : name(name),
 type(type),
 values(values),
 weight(weight)
-{};
+{}
 
-/* Returns the index of a given attribute value. (The index of the first occurence of this value.)
- * Returns -1 if the attribute is not nominal or the value cannot be found.	*/
-int Attribute::indexOfValue(char* value)
+/* Returns the name of the attribute */
+char* Attribute::getName()
 {
-	if (type != NOMINAL)
-		return -1;
+	return name;
+}
 
-	int index = 0;
-	for (std::vector<char*>::iterator it = values.begin(); it != values.end(); ++it)
+/* Returns the inner representation of the type of the attribute. */
+int	Attribute::getType()
+{
+	return type;
+}
+
+/* Returns the string representation of the type. */
+char* Attribute::getStringType()
+{
+	switch (type)
 	{
-		if (strcmp(*it, value) == 0)
-			return index;
-
-			++index;
+	case NOMINAL:
+		return "nominal";
+	case NUMERIC:
+		return "numeric";
+	case STRING:
+		return "string";
+	default:
+		return "";
 	}
+}
 
-	return -1;
+/* Returns the weight of the attribute */
+double Attribute::getWeight()
+{
+	return weight;
+}
+
+/* Returns the values of the attribute. */
+std::vector<char*> Attribute::getValues()
+{
+	return values;
+}
+
+/* Returns the value at the given position. If the attribute is not nominal, or
+ * the position is out ot array bounds, an empty string would be returned. */
+char* Attribute::getValueAt(int index)
+{
+	if (type != Attribute::NOMINAL)
+		return "";
+
+	if (index < 0 || index >= numValues())
+		return "";
+
+	return values[index];
+}
+
+/* Set new weight to the attribute. */
+void Attribute::setWeight(double newWeight)
+{
+	weight = newWeight;
+
+	return;
+}
+
+/* Set value at the given position. If the attribute is not nominal, nothing will
+ * happen. */
+void Attribute::setValue(int index, char* value)
+{
+	if (type != Attribute::NOMINAL)
+		return;
+
+	values[index] = value;
+
+	return;
 }
 
 /* Returns true if the type of the attribute is Nominal. */
@@ -53,13 +120,32 @@ bool Attribute::isString()
 	return type == Attribute::STRING;
 }
 
+/* Returns the index of a given attribute value. (The index of the first occurence of this value.)
+ * Returns -1 if the attribute is not nominal or the value cannot be found.	*/
+int Attribute::indexOfValue(char* value)
+{
+	if (type != NOMINAL)
+		return -1;
+
+	int index = 0;
+	for (int i = 0; i < numValues(); ++i)
+	{
+		if (strcmp(values[i], value) == 0)
+			return index;
+
+			++index;
+	}
+
+	return -1;
+}
+
 /* Returns the number values. Returns 1 if the attribute is not nominal. */
 int Attribute::numValues()
 {
 	if (type != NOMINAL)
-		return 1;
+		return 0;
 
-	return values.size();
+	return (int)values.size();
 }
 
 /* Returns the attribute as a string in ARFF format. */
@@ -68,7 +154,11 @@ std::string Attribute::toString()
 	std::string s("@attribute ");
 	
 	if (strchr(name, ' ') != NULL)
-		s += "\"" + name + "\"";
+	{
+		s += "\"";
+		s += name;
+		s += "\"";
+	}
 	else
 		s += name;
 	s += " ";
@@ -83,8 +173,11 @@ std::string Attribute::toString()
 			break;
 		case Attribute::NOMINAL:
 			s += "{";
-			for (std::vector<char*>::iterator it = values.begein(); it != values.end(); ++it)
-				s += *it + ",";
+			for (int i = 0; i < numValues(); ++i)
+			{
+				s += values[i];
+				s += ",";
+			}
 			s.replace(s.length() - 1, 1, "}");
 			break;
 	}
@@ -103,19 +196,16 @@ bool Attribute::operator==(Attribute* other)
 
 	if (type != other->getType())
 		return false;
-
-	if (weight != other->getWeight())
-		return false;
  
 	if (type == NOMINAL)
 	{
-		if (values.size() != other->getValues.size())
+		if (values.size() != other->numValues())
 			return false;
 
-		for (std::vector<char*>::iterator it1 = values.begin(), it2 = other->getValues.begin();
-				it1 != values.end(); ++it1, ++it2)
+		std::vector<char*> otherValues = other->getValues();
+		for (int i = 0; i < numValues(); ++i)
 		{
-			if (strcmp((*it1), (*it2)) != 0)
+			if (strcmp(values[i], otherValues[i]) != 0)
 				return false;
 		}
 	}
@@ -123,23 +213,43 @@ bool Attribute::operator==(Attribute* other)
 	return true;
 }
 
-/* Returns the index of the given value if the attribute is nominal.
- * If the attribute is not nominal, or the value is not found, -1 will
- * be returned. If more of one value are existing, the index of the 
- * first will be returned. */
-int Attribute::getValueIndex(char* value)
+/* Adds an attribute value at last position. 
+ * If the attribute is not nominal, nothing will happen. */
+void Attribute::addValue(char* value)
 {
-	if (type != NOMINAL)
-		return -1;
+	addValue(numValues(), value);
 
-	int index = 0;
-	for (std::vector<char*>::iterator it = values.begin(); it != values.end(); ++it)
-	{
-		if (strcmp((*it), value) == 0)
-			return index;
-		
-		++index;
-	}
+	return;
+}
 
-	return -1;
+/* Adds an attribute value at given position. 
+ * If the attribute is not nominal, nothing will happen. */
+void Attribute::addValue(int index, char* value)
+{
+	if (type != Attribute::NOMINAL)
+		return;
+
+	values.insert(values.begin() + index, value);
+
+	return;
+}
+/* Removes the last value of the nominal attribute.
+ * If the attribute is not nominal, nothing would happen. */
+void Attribute::removeValue()
+{
+	removeValue(numValues() - 1);
+
+	return;
+}
+
+/* Removes a value of a nominal attribute. 
+ * If the attribute is not nominal nothing would happen. */
+void Attribute::removeValue(int index)
+{
+	if (type != Attribute::NOMINAL)
+		return;
+
+	values.erase(values.begin() + index);
+
+	return;
 }

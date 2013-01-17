@@ -522,6 +522,10 @@
 						</File>
 					</Filter>
 				</Filter>
+				<Filter
+					Name="IO"
+					>
+				</Filter>
 			</Filter>
 		</Filter>
 	</Files>

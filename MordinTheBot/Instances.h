@@ -1,5 +1,7 @@
+#pragma once
 #include <vector>
 #include <cstring>
+#include <string>
 #include "Attribute.h"
 
 class Instance;
@@ -19,36 +21,31 @@ public:
 	Instances(Instances& dataset);
 
 	// Getters
-	Attribute*				getAttribute		(int index);	{ return attributes[index]; }
+	Attribute*				getAttribute		(int index);
 	Attribute*				getAttribute		(char* name);
 	int						getAttributeIndex	(Attribute* attribute);
-	std::vector<Attribute*>	getAttributes		()				{ return attributes; }
-	Attribute*				getClassAttribute	()				{ return attributes[classIndex]; }
-	/* Returns the class attribute's index. Returns negative number if it's undefined. */
-	int						getClassIndex		()				{ return classIndex; }
-	std::vector<Instance*>	getInstances		()				{ return instances;	 }
-	Instance*				getfirstInstance	()				{ return getInstance(0); }
-	Instance*				getInstance			(int index)		{ return instances[index]; }
+	std::vector<Attribute*>	getAttributes		();
+	Attribute*				getClassAttribute	();
+	int						getClassIndex		();
+	std::vector<Instance*>	getInstances		();
+	Instance*				getfirstInstance	();
+	Instance*				getInstance			(int index);
 	Instance*				getLastInstance		();
-	char*					getRelationName		()				{ return relationName; }
+	char*					getRelationName		();
 
 	// Setters
-	void	setClass		(Attribute attribute);
-	/* Sets the class index of the set. If the class index is negative there is assumed to be no class. 
-	 * (ie. it is undefined) */
-	void	setClassIndex	(int classIndex)		{ this->classIndex = classIndex; }
-	void	setRelationName	(char* name)			{ this->relationName = name; }
+	void	setClass		(Attribute* attribute);
+	void	setClassIndex	(int newClassIndex);
+	void	setRelationName	(char* newRelationName);
 
 	// Methods
-	void		add					(Instance instance);
+	void		add					(Instance* instance);
 	bool		checkInstance		(Instance* instance);
 	void		remove				();
 	void		remove				(int index);
 	void		removeAttributeAt	(int position);
 	void		insertAttributeAt	(Attribute* attribute, int position);
-	/* Returns the number of attributes. */
-	int			numAttributes		()	{ return attributes.size(); }
-	/* Returns the number of instances in the dataset. */
-	int			numInstances		()	{ return instances.size(); }
+	int			numAttributes		();
+	int			numInstances		();
 	std::string	toString			();
 };

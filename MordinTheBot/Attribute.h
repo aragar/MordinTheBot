@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include <cstring>
 #include <vector>
@@ -9,32 +10,37 @@ private:
 	int		type;
 	double	weight;
 
-	std::vector<char*> values;
+	std::vector<char*> values; // for NOMINAL attributes
 public:
 	static const enum {NUMERIC, NOMINAL, STRING};
 
 	// Constructors
-	Attribute();
+	Attribute(char* name);
 	Attribute(char* name, int type, double weight = 1.0);
-	Attribute(char* name, int type, std::vector<string> values, double weight = 1.0);
+	Attribute(char* name, int type, std::vector<char*> values, double weight = 1.0);
 
 	// Getters
-	string				getName()					{ return name; }	// TBD: To return copy
-	int					getType()					{ return type; }
-	double				getWeight()					{ return weight; }
-	std::vector<char*>	getValues()					{ return values; }	// TBD: To return copy
-	char*				geValueAt(int index)		{ return values[index]; } // TBD: To return copy
-	int					getValueIndex(char* value);
+	char*				getName();
+	int					getType();
+	char*				getStringType();
+	double				getWeight();
+	std::vector<char*>	getValues();
+	char*				getValueAt(int index);
 
 	// Setters
-	void setWeight(double newWeight)	{ weight = newWeight; }
+	void setWeight	(double newWeight);
+	void setValue	(int index, char* value);
 
 	// Methods
-	bool		isNumeric		();
 	bool		isNominal		();
+	bool		isNumeric		();
 	bool		isString		();
 	int			indexOfValue	(char* value);
 	int			numValues		();
 	std::string	toString		();
-	bool		operator==		(Instance* other);
+	bool		operator==		(Attribute* other);
+	void		addValue		(char* value);
+	void		addValue		(int index, char* value);
+	void		removeValue		();
+	void		removeValue		(int index);
 };
