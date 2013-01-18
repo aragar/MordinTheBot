@@ -1,7 +1,8 @@
 #pragma once
 #include "Attribute.h"
 #include "Instance.h"
-#include "Instances.h"
+
+class Instances;
 
 class ArffReader
 {
@@ -11,14 +12,14 @@ private:
 
 public:
 	// Constructors;
-	ArffReader	(char* arffFileName);
+	ArffReader (char* arffFileName);
 
 	// Destructors;
-	~ArffReader	();
+	~ArffReader();
 	
 	// Getters;
-	Instances*	getData();
+	Instances* getData();
 
 	// Methods;
-	void		read();
+	void read();
 };

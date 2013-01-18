@@ -1,5 +1,6 @@
 #include "Instances.h"
 #include "Instance.h"
+#include "ArffReader.h"
 
 Instances::Instances(char* relationName, std::vector<Attribute*>& attributes, int capacity)
 : relationName(relationName),
@@ -27,6 +28,17 @@ attributes(dataset.getAttributes()),
 instances(dataset.getInstances()),
 classIndex(dataset.getClassIndex())
 {}
+
+Instances::Instances(ArffReader* arffReader)
+{
+	arffReader->read();
+	Instances* dataset = arffReader->getData();
+
+	relationName	= dataset->getRelationName();
+	attributes		= dataset->getAttributes();
+	instances		= dataset->getInstances();
+	classIndex		= dataset->getClassIndex();
+}
 
 /* Returns an attribue at the given position. */
 Attribute* Instances::getAttribute(int index)

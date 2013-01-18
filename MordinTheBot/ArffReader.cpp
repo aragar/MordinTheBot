@@ -1,6 +1,4 @@
 #include "ArffReader.h"
-#include "Attribute.h"
-#include "Instance.h"
 #include "Instances.h"
 
 #include <vector>

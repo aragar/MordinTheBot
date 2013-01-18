@@ -2,9 +2,11 @@
 #include <vector>
 #include <cstring>
 #include <string>
+
 #include "Attribute.h"
 
 class Instance;
+class ArffReader;
 
 class Instances
 {
@@ -19,6 +21,7 @@ public:
 	Instances(char* relationName, std::vector<Attribute*>& attributes, int capacity = 0);
 	Instances(Instances* dataset);
 	Instances(Instances& dataset);
+	Instances(ArffReader* arffReader);
 
 	// Getters
 	Attribute*				getAttribute		(int index);
