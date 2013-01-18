@@ -10,6 +10,8 @@ classIndex(-1)
 		capacity = 0;
 
 	instances.reserve(capacity);
+	for (int i = 0; i < numAttributes(); ++i)
+		attributes[i]->setIndex(i);
 }
 
 Instances::Instances(Instances* dataset)
@@ -48,17 +50,7 @@ Attribute* Instances::getAttribute(char* name)
  * can't be found. */
 int Instances::getAttributeIndex(Attribute* attribute)
 {
-	int index = 0;
-
-	for (std::vector<Attribute*>::iterator it = attributes.begin(); it != attributes.end(); ++it)
-	{
-		if (attribute == (*it))
-			return index;
-
-		++index;
-	}
-
-	return -1;
+	return attribute->getIndex();
 }
 
 /* Returns the attributes of the dataset. */
@@ -142,7 +134,7 @@ void Instances::add(Instance* instance)
 {
 	Instance* result = new Instance(instance);
 	result->setDataset(this);
-	
+
 	instances.push_back(result);
 
 	return;
@@ -195,6 +187,9 @@ void Instances::removeAttributeAt(int position)
 		--classIndex;
 	attributes.erase(attributes.begin() + position);
 
+	for (int i = position; i < numAttributes(); ++i)
+		attributes[i]->setIndex(attributes[i]->getIndex() - 1);
+
 	for (int i = 0; i < numInstances(); ++i)
 	{
 		Instance* instance = getInstance(i);
@@ -213,9 +208,14 @@ void Instances::insertAttributeAt(Attribute* attribute, int position)
 	if (getAttribute(attribute->getName()) != NULL)
 		return;
 
+	attribute->setIndex(position);
 	attributes.insert(attributes.begin() + position, attribute);
 	if (classIndex >= position)
 		++classIndex;
+
+	for (int i = position + 1; i < numAttributes(); ++i)
+		attributes[i]->setIndex(attributes[i]->getIndex() + 1);
+
 	for (int i = 0; i < numInstances(); ++i)
 	{
 		Instance* instance = instances[i];

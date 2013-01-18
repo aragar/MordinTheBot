@@ -41,6 +41,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;C:\Moridin The Bot\MoridinTheBot\include&quot;"
+				PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -525,9 +526,29 @@
 				<Filter
 					Name="IO"
 					>
+					<Filter
+						Name="ArffReader"
+						>
+						<File
+							RelativePath=".\ArffReader.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\ArffReader.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 		</Filter>
+		<File
+			RelativePath=".\MordinTheBot.rc"
+			>
+		</File>
+		<File
+			RelativePath=".\resource.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

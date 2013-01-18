@@ -9,6 +9,7 @@ private:
 	char*	name;
 	int		type;
 	double	weight;
+	int		index;
 
 	std::vector<char*> values; // for NOMINAL attributes
 public:
@@ -26,10 +27,12 @@ public:
 	double				getWeight();
 	std::vector<char*>	getValues();
 	char*				getValueAt(int index);
+	int					getIndex();
 
 	// Setters
-	void setWeight	(double newWeight);
-	void setValue	(int index, char* value);
+	void	setWeight	(double newWeight);
+	void	setValue	(int index, char* value);
+	void	setIndex	(int index);
 
 	// Methods
 	bool		isNominal		();

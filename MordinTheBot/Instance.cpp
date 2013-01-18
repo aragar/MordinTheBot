@@ -166,7 +166,7 @@ void Instance::setValue(int attrIndex, double value)
 	return;
 }
 
-/* Set the value for the gieven attribute index. */
+/* Set the value for the given attribute index. */
 void Instance::setValue(int attrIndex, char* value)
 {
 	Attribute* attribute = getAttributeAt(attrIndex);

@@ -4,7 +4,8 @@
 Attribute::Attribute(char* name)
 : name(name),
 type(NUMERIC),
-weight(1.0)
+weight(1.0),
+index(-1)
 {
 	values.clear();
 }
@@ -14,7 +15,8 @@ weight(1.0)
 Attribute::Attribute(char* name, int type, double weight)
 : name(name),
 type(type), 
-weight(weight)
+weight(weight),
+index(-1)
 {
 	values.clear();
 }
@@ -26,7 +28,8 @@ Attribute::Attribute(char* name, int type, std::vector<char*>& values, double we
 : name(name),
 type(type),
 values(values),
-weight(weight)
+weight(weight),
+index(-1)
 {}
 
 /* Returns the name of the attribute */
@@ -82,6 +85,12 @@ char* Attribute::getValueAt(int index)
 	return values[index];
 }
 
+/* Returns the attribute's index. If index is missing, it will return a negative value. */
+int Attribute::getIndex()
+{
+	return index;
+}
+
 /* Set new weight to the attribute. */
 void Attribute::setWeight(double newWeight)
 {
@@ -98,6 +107,14 @@ void Attribute::setValue(int index, char* value)
 		return;
 
 	values[index] = value;
+
+	return;
+}
+
+/* Sets the attribute's index. */
+void Attribute::setIndex(int index)
+{
+	this->index = index;
 
 	return;
 }
@@ -127,13 +144,10 @@ int Attribute::indexOfValue(char* value)
 	if (type != NOMINAL)
 		return -1;
 
-	int index = 0;
 	for (int i = 0; i < numValues(); ++i)
 	{
 		if (strcmp(values[i], value) == 0)
-			return index;
-
-			++index;
+			return i;
 	}
 
 	return -1;
