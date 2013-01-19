@@ -206,6 +206,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\test.cpp"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

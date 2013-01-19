@@ -6,23 +6,23 @@
 class Attribute
 {
 private:
-	char*	name;
-	int		type;
-	double	weight;
-	int		index;
+	const char*	name;
+	const int	type;
+	double		weight;
+	int			index;
 
 	std::vector<char*> values; // for NOMINAL attributes
 public:
 	static const enum {NUMERIC, NOMINAL, STRING};
 
 	// Constructors
-	Attribute(char* name);
-	Attribute(char* name, int type, double weight = 1.0);
-	Attribute(char* name, int type, std::vector<char*>& values, double weight = 1.0);
+	Attribute(const char* name);
+	Attribute(const char* name, const int type, double weight = 1.0);
+	Attribute(const char* name, const int type, std::vector<char*>& values, double weight = 1.0);
 
 	// Getters
-	char*				getName();
-	int					getType();
+	const char*			getName();
+	const int			getType();
 	char*				getStringType();
 	double				getWeight();
 	std::vector<char*>	getValues();

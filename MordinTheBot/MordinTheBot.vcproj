@@ -466,6 +466,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GeneralBWAPI.h"
+				>
+			</File>
+			<File
 				RelativePath=".\MordinAIModule.h"
 				>
 			</File>
@@ -540,6 +544,18 @@
 						</File>
 					</Filter>
 				</Filter>
+			</Filter>
+			<Filter
+				Name="GameEncoder"
+				>
+				<File
+					RelativePath=".\GameEncoder.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GameEncoder.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<File

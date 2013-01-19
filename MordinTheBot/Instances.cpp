@@ -48,7 +48,7 @@ Attribute* Instances::getAttribute(int index)
 
 /* Returns an attribute given its name. If there is more than one attribute with the
  * same name, it returns the first one. Returns null if the attribute can't be found. */
-Attribute* Instances::getAttribute(char* name)
+Attribute* Instances::getAttribute(const char* name)
 {
 	for (int i = 0; i < numAttributes(); ++i)
 		if (strcmp(attributes[i]->getName(), name) == 0)

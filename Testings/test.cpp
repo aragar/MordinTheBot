@@ -1,11 +1,8 @@
 #include <cstdio>
-#include <NumericAttribute.h>
 
-int main()
+int _main()
 {
-	NumericAttribute numAttr("Rado", 13);
-
-	printf("%s: %d", numAttr.getName().cstr(), numAttr.getValue());
+	printf("%s\n", ("abv" + "abv").c_str());
 
 	return 0;
 }

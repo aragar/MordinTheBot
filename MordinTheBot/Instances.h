@@ -25,7 +25,7 @@ public:
 
 	// Getters
 	Attribute*				getAttribute		(int index);
-	Attribute*				getAttribute		(char* name);
+	Attribute*				getAttribute		(const char* name);
 	int						getAttributeIndex	(Attribute* attribute);
 	std::vector<Attribute*>	getAttributes		();
 	Attribute*				getClassAttribute	();

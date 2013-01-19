@@ -1,7 +1,7 @@
 #include "Attribute.h"
 
 /* Creates a numeric attribute with the given name. */
-Attribute::Attribute(char* name)
+Attribute::Attribute(const char* name)
 : name(name),
 type(NUMERIC),
 weight(1.0),
@@ -12,7 +12,7 @@ index(-1)
 
 /* Createes an attribute with the given name, type, and weight.
  * If the attribute is nominal, it would have empty list of values. */
-Attribute::Attribute(char* name, int type, double weight)
+Attribute::Attribute(const char* name, const int type, double weight)
 : name(name),
 type(type), 
 weight(weight),
@@ -24,7 +24,7 @@ index(-1)
 /* Creates an attribute with given name, type, and weight. The given values are
  * set as possible for the attribute.
  * If the type is not nominal, the values won't be considered further. */
-Attribute::Attribute(char* name, int type, std::vector<char*>& values, double weight)
+Attribute::Attribute(const char* name, const int type, std::vector<char*>& values, double weight)
 : name(name),
 type(type),
 values(values),
@@ -33,13 +33,13 @@ index(-1)
 {}
 
 /* Returns the name of the attribute */
-char* Attribute::getName()
+const char* Attribute::getName()
 {
 	return name;
 }
 
 /* Returns the inner representation of the type of the attribute. */
-int	Attribute::getType()
+const int Attribute::getType()
 {
 	return type;
 }
