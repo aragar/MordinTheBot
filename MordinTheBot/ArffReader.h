@@ -7,12 +7,12 @@ class Instances;
 class ArffReader
 {
 private:
-	char*		arffFileName;
+	const char*	arffFileName;
 	Instances*	dataset;
 
 public:
 	// Constructors;
-	ArffReader (char* arffFileName);
+	ArffReader (const char* arffFileName);
 
 	// Destructors;
 	~ArffReader();

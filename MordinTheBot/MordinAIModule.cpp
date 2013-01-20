@@ -57,7 +57,7 @@ void MordinAIModule::onStart()
     }
   }
   this->buildOrderManager->enableDependencyResolver();
-  //make the basic production facility
+  //make the Mordin production facility
   if (race == Races::Zerg)
   {
     //send an overlord out if Zerg

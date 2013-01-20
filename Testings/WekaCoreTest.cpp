@@ -11,7 +11,7 @@ void printAttr(Attribute* attribute);
 void printInstances(Instances* instances);
 void printInstance(Instance* instance);
 
-int _main()
+int MyWekaCoreTest_main()
 {
 	// Attribute Test;
 	Attribute* attribute = new Attribute("Length", Attribute::NOMINAL);

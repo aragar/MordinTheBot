@@ -4,7 +4,7 @@
 #include <vector>
 
 /* Creates an arff file reader. */
-ArffReader::ArffReader(char* arffFileName)
+ArffReader::ArffReader(const char* arffFileName)
 : arffFileName(arffFileName)
 {}
 
@@ -67,7 +67,8 @@ void ArffReader::read()
 	
 	while (strncmp(line, "@attribute", strlen("@attribute")) != 0)
 	{
-		tmp = strchr(arffString, '\n') + 1;
+		tmp = strchr(arffString, '\n');
+		tmp += strspn(tmp, "\n");
 		line = strtok(arffString, "\n");
 		arffString = tmp;
 	}
@@ -84,6 +85,8 @@ void ArffReader::read()
 		{
 			if (strcmp (attrType, "numeric") == 0)
 				attributes.push_back(new Attribute(attrName, Attribute::NUMERIC));
+			else
+				attributes.push_back(new Attribute(attrName));
 		}
 		else
 		{
@@ -142,6 +145,8 @@ void ArffReader::read()
 			case Attribute::NUMERIC:
 				instance->setValue(i, atof(value));
 				break;
+			default:
+				instance->setValue(i, atof(value));
 			}
 		}
 

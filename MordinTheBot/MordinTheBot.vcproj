@@ -557,6 +557,30 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Filter"
+				>
+				<File
+					RelativePath=".\AllInFilter.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\BothUnitsAndTimingOnlyFilter.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\BothUnitsTimingResearchAndUpgradeFilter.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Filter.h"
+					>
+				</File>
+				<File
+					RelativePath=".\MyUnitsOnlyFilter.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath=".\MordinTheBot.rc"

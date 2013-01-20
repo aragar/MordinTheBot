@@ -2,7 +2,7 @@
 
 #include <cstdio>
 
-int _main()
+int main()
 {
 	ArffReader* arffReader = new ArffReader("..\\Arffs\\tracesPvZ-Protoss.arff");
 

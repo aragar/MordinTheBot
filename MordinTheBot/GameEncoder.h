@@ -19,7 +19,6 @@ private:
 	Player*	self;
 	Player*	enemy;
 
-	Instances*	dataset;
 	Instance*	lastInstance;
 
 	std::vector<UnitType*>		selfTypes;
@@ -30,6 +29,8 @@ private:
 	std::vector<UpgradeType*>	enemyUpgrades;
 
 public:
+	Instances*			dataset;
+
 	std::map<int, int>	selfTypeMap;
 	std::map<int, int>	selfTimingMap;
 	std::map<int, int>	selfResearchMap;

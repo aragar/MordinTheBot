@@ -1,8 +1,7 @@
 #include <cstdio>
 
-int _main()
+int test_main()
 {
-	printf("%s\n", ("abv" + "abv").c_str());
 
 	return 0;
 }
