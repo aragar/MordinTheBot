@@ -16,8 +16,8 @@ using namespace BWAPI;
 class GameEncoder
 {
 private:
-	Player*	self;
-	Player*	enemy;
+	const Race*	self;
+	const Race*	enemy;
 
 	Instance*	lastInstance;
 
@@ -56,7 +56,7 @@ public:
 	int cycleIndex;
 
 	// Constructors;
-	GameEncoder(Player* self, Player* enemy);
+	GameEncoder(const Race* self, const Race* enemy);
 
 	// Methods;
 	Instance*	encodeGame(Game* game, BuildManager* buildManager);

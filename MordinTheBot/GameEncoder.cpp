@@ -4,7 +4,7 @@
 #include <string>
 #include <sstream>
 
-GameEncoder::GameEncoder(Player* self, Player* enemy)
+GameEncoder::GameEncoder(const Race* self, const Race* enemy)
 : self(self),
 enemy(enemy), 
 mapIndex(0),
@@ -256,84 +256,89 @@ cycleIndex(3)
 /* Returns the current game state encoding. */
 Instance* GameEncoder::encodeGame(Game* game, BuildManager* buildManager)
 {
-	Instance* instance = new Instance(lastInstance);
-	instance->setDataset(dataset);
+	//Player* selfPlayer = game->self();
+	//Player* enemyPlayer = game->enemy();
 
-	// Sets fundamentals;
-	instance->setValue(mapIndex, 0.0);
-	instance->setValue(winIndex, 0.0);
-	instance->setValue(traceIndex, 0.0);
-	instance->setValue(cycleIndex, (double)game->getFrameCount());
+	//Instance* instance = new Instance(lastInstance);
+	//instance->setDataset(dataset);
 
-	// Sets self units;
-	for (int i = 0; i < (int)selfTypes.size(); ++i)
-	{
-		UnitType* type = selfTypes[i];
-		int count = self->allUnitCount(*type);
-		// planned;
-		count += buildManager->getCompletedCount(*type) -
-			buildManager->getStartedCount(*type);
+	//// Sets fundamentals;
+	//instance->setValue(mapIndex, 0.0);
+	//instance->setValue(winIndex, 0.0);
+	//instance->setValue(traceIndex, 0.0);
+	//instance->setValue(cycleIndex, (double)game->getFrameCount());
 
-		instance->setValue(selfTypeMap[type->getID()], count);
+	//// Sets self units;
+	//for (int i = 0; i < (int)selfTypes.size(); ++i)
+	//{
+	//	UnitType* type = selfTypes[i];
+	//	int count = selfPlayer->allUnitCount(*type);
+	//	// planned;
+	//	count += buildManager->getCompletedCount(*type) -
+	//		buildManager->getStartedCount(*type);
 
-		if (count > 0 && lastInstance->getValue(selfTimingMap[type->getID()]) == 0)
-			instance->setValue(selfTimingMap[type->getID()], (double)game->getFrameCount());
-	}
+	//	instance->setValue(selfTypeMap[type->getID()], count);
 
-	// Sets self researches;
-	for (int i = 0; i < (int)selfResearches.size(); ++i)
-	{
-		TechType* type = selfResearches[i];
-		if (lastInstance->getValue(selfResearchMap[type->getID()]) == 0)
-			if (self->hasResearched(*type) == true)
-				instance->setValue(selfResearchMap[type->getID()], (double)game->getFrameCount());
-	}
+	//	if (count > 0 && lastInstance->getValue(selfTimingMap[type->getID()]) == 0)
+	//		instance->setValue(selfTimingMap[type->getID()], (double)game->getFrameCount());
+	//}
 
-	// Sets self upgrades;
-	for (int i = 0; i < (int)selfUpgrades.size(); ++i)
-	{
-		UpgradeType* type = selfUpgrades[i];
-		if (lastInstance->getValue(selfUpgradeMap[type->getID()]) == 0)
-			if (self->getUpgradeLevel(*type) > 0)
-				instance->setValue(selfUpgradeMap[type->getID()], (double)game->getFrameCount());
-	}
+	//// Sets self researches;
+	//for (int i = 0; i < (int)selfResearches.size(); ++i)
+	//{
+	//	TechType* type = selfResearches[i];
+	//	if (lastInstance->getValue(selfResearchMap[type->getID()]) == 0)
+	//		if (selfPlayer->hasResearched(*type) == true)
+	//			instance->setValue(selfResearchMap[type->getID()], (double)game->getFrameCount());
+	//}
+
+	//// Sets self upgrades;
+	//for (int i = 0; i < (int)selfUpgrades.size(); ++i)
+	//{
+	//	UpgradeType* type = selfUpgrades[i];
+	//	if (lastInstance->getValue(selfUpgradeMap[type->getID()]) == 0)
+	//		if (selfPlayer->getUpgradeLevel(*type) > 0)
+	//			instance->setValue(selfUpgradeMap[type->getID()], (double)game->getFrameCount());
+	//}
 
 
-	// Sets enemy units;
-	for (int i = 0; i < (int)enemyTypes.size(); ++i)
-	{
-		UnitType* type = enemyTypes[i];
-		int count = enemy->allUnitCount(*type);
-		// planned;
-		count += buildManager->getCompletedCount(*type) -
-			buildManager->getStartedCount(*type);
-		
-		instance->setValue(enemyTypeMap[type->getID()], count);
+	//// Sets enemy units;
+	//for (int i = 0; i < (int)enemyTypes.size(); ++i)
+	//{
+	//	UnitType* type = enemyTypes[i];
+	//	int count = enemyPlayer->allUnitCount(*type);
+	//	// planned;
+	//	count += buildManager->getCompletedCount(*type) -
+	//		buildManager->getStartedCount(*type);
+	//	
+	//	instance->setValue(enemyTypeMap[type->getID()], count);
 
-		if (count > 0 && lastInstance->getValue(enemyTimingMap[type->getID()]) == 0)
-			instance->setValue(enemyTimingMap[type->getID()], (double)game->getFrameCount());
-	}
+	//	if (count > 0 && lastInstance->getValue(enemyTimingMap[type->getID()]) == 0)
+	//		instance->setValue(enemyTimingMap[type->getID()], (double)game->getFrameCount());
+	//}
 
-	// Sets enemy researches;
-	for (int i = 0; i < (int)enemyResearches.size(); ++i)
-	{
-		TechType* type = enemyResearches[i];
-		if (lastInstance->getValue(enemyResearchMap[type->getID()]) == 0)
-			if (enemy->hasResearched(*type) == true)
-				instance->setValue(enemyResearchMap[type->getID()], (double)game->getFrameCount());
-	}
+	//// Sets enemy researches;
+	//for (int i = 0; i < (int)enemyResearches.size(); ++i)
+	//{
+	//	TechType* type = enemyResearches[i];
+	//	if (lastInstance->getValue(enemyResearchMap[type->getID()]) == 0)
+	//		if (enemyPlayer->hasResearched(*type) == true)
+	//			instance->setValue(enemyResearchMap[type->getID()], (double)game->getFrameCount());
+	//}
 
-	// Sets enemy upgrades;
-	for (int i = 0; i < (int)enemyUpgrades.size(); ++i)
-	{
-		UpgradeType* type = enemyUpgrades[i];
-		if (lastInstance->getValue(enemyUpgradeMap[type->getID()]) == 0)
-			if (enemy->getUpgradeLevel(*type) > 0)
-				instance->setValue(enemyUpgradeMap[type->getID()], (double)game->getFrameCount());
-	}
+	//// Sets enemy upgrades;
+	//for (int i = 0; i < (int)enemyUpgrades.size(); ++i)
+	//{
+	//	UpgradeType* type = enemyUpgrades[i];
+	//	if (lastInstance->getValue(enemyUpgradeMap[type->getID()]) == 0)
+	//		if (enemyPlayer->getUpgradeLevel(*type) > 0)
+	//			instance->setValue(enemyUpgradeMap[type->getID()], (double)game->getFrameCount());
+	//}
 
-	lastInstance = instance;
-	return instance;
+	//lastInstance = instance;
+	//return instance;
+
+	return new Instance(3);
 }
 
 /* Returns a string representation of the state. */

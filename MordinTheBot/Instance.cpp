@@ -230,7 +230,7 @@ std::string Instance::toString()
 			case Attribute::NUMERIC:
 			{
 				char tmp[64];
-				s += _itoa_s((int)values[i], tmp, 64, 10);
+				s += itoa((int)values[i], tmp, 10);
 			}
 				break;
 			case Attribute::NOMINAL:

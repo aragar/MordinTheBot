@@ -561,15 +561,15 @@
 				Name="Filter"
 				>
 				<File
-					RelativePath=".\AllInFilter.cpp"
+					RelativePath=".\AllInFilter.h"
 					>
 				</File>
 				<File
-					RelativePath=".\BothUnitsAndTimingOnlyFilter.cpp"
+					RelativePath=".\BothUnitsAndTimingsOnlyFilter.h"
 					>
 				</File>
 				<File
-					RelativePath=".\BothUnitsTimingResearchAndUpgradeFilter.cpp"
+					RelativePath=".\BothUnitsTimingsResearchAndUpgradeFilter.h"
 					>
 				</File>
 				<File
@@ -577,7 +577,15 @@
 					>
 				</File>
 				<File
-					RelativePath=".\MyUnitsOnlyFilter.cpp"
+					RelativePath=".\MyUnitsOnlyFilter.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="GamesImporter"
+				>
+				<File
+					RelativePath=".\GamesImporter.h"
 					>
 				</File>
 			</Filter>

@@ -1,12 +1,16 @@
 #include "..\\MordinTheBot\\ArffReader.h"
 
+
 #include <cstdio>
 
-int main()
+void printDataset(Instances* dataset);
+
+int ArffReaderTest_main()
 {
 	ArffReader* arffReader = new ArffReader("..\\Arffs\\tracesPvZ-Protoss.arff");
 
 	arffReader->read();
+	Instances* dataset = arffReader->getData();
 
 	return 0;
 }
