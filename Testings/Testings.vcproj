@@ -224,6 +224,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\MordinTheBot\Filter.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\MordinTheBot\Filter.h"
 				>
 			</File>
@@ -253,6 +257,14 @@
 			</File>
 			<File
 				RelativePath=".\GamesImporterTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\MordinTheBot\TraceRetriever.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\MordinTheBot\TraceRetriever.h"
 				>
 			</File>
 		</Filter>

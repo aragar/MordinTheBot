@@ -19,8 +19,15 @@ public:
 	{
 		double dist = 0.0;
 
-		for (int i = encoder->selfTypeIndex; i < encoder->classIndex; ++i)
+		for (int i = encoder->selfTypeIndex; i < encoder->selfTimingIndex; ++i)
 			dist += (lhs->getValue(i) - rhs->getValue(i)) * (lhs->getValue(i) - rhs->getValue(i));
+		for (int i = encoder->selfTimingIndex; i < encoder->enemyTypeIndex; ++i)
+			dist += (lhs->getValue(i) - rhs->getValue(i)) * (lhs->getValue(i) - rhs->getValue(i)) * EXP;
+
+		for (int i = encoder->enemyTypeIndex; i < encoder->enemyTimingIndex; ++i)
+			dist += (lhs->getValue(i) - rhs->getValue(i)) * (lhs->getValue(i) - rhs->getValue(i));
+		for (int i = encoder->enemyTimingIndex; i < encoder->classIndex; ++i)
+			dist += (lhs->getValue(i) - rhs->getValue(i)) * (lhs->getValue(i) - rhs->getValue(i)) * EXP;
 
 		dist = sqrt(dist);
 

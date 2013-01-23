@@ -5,13 +5,12 @@
 class Filter
 {
 protected:
-	GameEncoder* encoder;
+	GameEncoder*		encoder;
+	static const double	EXP;
 
 public:
 	// Constructors;
-	Filter(GameEncoder* encoder)
-		: encoder(encoder)
-	{}
+	Filter(GameEncoder* encoder);
 
 	// Methods
 	/* Returns the distance between the two instances */

@@ -538,3 +538,17 @@ Number of instances in game 535: 191
 Number of instances in game 536: 68
 Number of instances in game 537: 80
 Number of instances in game 538: 122
+
+From trace 319 instance 135 was chosen
+Commands:
+1: Protoss_PylonCount
+2: Protoss_NexusCount
+3: Protoss_DragoonCount
+4: Singularity_Charge
+5: Protoss_GatewayCount
+6: Protoss_DragoonCount
+7: Protoss_Photon_CannonCount
+8: Protoss_Photon_CannonCount
+9: Protoss_ProbeCount
+10: Protoss_GatewayCount
+

@@ -573,6 +573,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Filter.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\Filter.h"
 					>
 				</File>
@@ -586,6 +590,18 @@
 				>
 				<File
 					RelativePath=".\GamesImporter.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="TraceRetriever"
+				>
+				<File
+					RelativePath=".\TraceRetriever.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\TraceRetriever.h"
 					>
 				</File>
 			</Filter>
