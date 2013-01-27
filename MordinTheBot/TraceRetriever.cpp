@@ -6,6 +6,8 @@
 
 #include <vector>
 
+#include "..//Addons//Util.h"
+
 
 const double TraceRetriever::e = 0.000001;
 
@@ -19,10 +21,12 @@ index(index)
 {}
 
 
-TraceRetriever::TraceRetriever(std::vector<Instances*> games, int k)
+TraceRetriever::TraceRetriever(std::vector<Instances*>* games, int k)
 : games(games),
 k(k)
-{}
+{
+	log("Init the tracer...\n");
+}
 
 /* Inserts the given game at the k-nearest games. */
 void TraceRetriever::insertGame(std::vector<Triple>& nearestGames, Instances* game, double dist, int index)
@@ -30,6 +34,7 @@ void TraceRetriever::insertGame(std::vector<Triple>& nearestGames, Instances* ga
 	// Get the reciprocal distance, as the difference rises, the probability to be chosen should
 	// lower. Add a small constance, due to the 0 difference and Infinity;
 	Triple triple(game, 1.0 / (dist + e), index);
+	dist = 1.0 / (dist + e);
 
 	int l = -1, r = nearestGames.size();
 	while (l + 1 < r)
@@ -71,33 +76,30 @@ TraceRetriever::Triple TraceRetriever::chooseRandomly(GameEncoder* encoder, std:
 /* Returns a list of actions' names to be executed. */
 std::vector<char*> TraceRetriever::getPlan(GameEncoder* encoder, Instance *instance, Filter *filter, int moves)
 {
+	log("Trace with k=%d retrieving start...\n", k);
+
 	std::vector<Triple> nearestGames;
 
 	// Finds the k-neareset instaces;
-	for (int i = 0; i < (int)games.size(); ++i)
+	for (int i = 0; i < (int)games->size(); ++i)
 	{
-		for (int j = 0; j < games[i]->numInstances() - moves; ++j)
+		for (int j = 0; j < (*games)[i]->numInstances() - moves; ++j)
 		{
-			Instance* curInstance = games[i]->getInstance(j);
+			Instance* curInstance = (*games)[i]->getInstance(j);
 			double dist = filter->findDistance(instance, curInstance);
 
-			insertGame(nearestGames, games[i], dist, j);
+			insertGame(nearestGames, (*games)[i], dist, j);
 		}
 	}
-
-	/*for (int i = 0; i < (int)nearestGames.size(); ++i)
-	printf("%6.4lf ", nearestGames[i].dist);
-	printf("\n");*/
 
 	// Choose with weighted probability one game;
 	Triple theChosen = chooseRandomly(encoder, nearestGames);
 	Instances* theGame = theChosen.game;
 	int index = theChosen.index;
 
-	/*printf("From game %d instance %d was chosen.\n", (int)theGame->getInstance(0)->getValue(encoder->traceIndex), index);	
-	getchar();*/
+	log("%s\n", theGame->getInstance(index)->toString().c_str());
 
-	// Write down the class values;
+	// Write down the class values
 	std::vector<char*> commands(moves);
 	for (int i = 0; i < moves; ++i)
 	{
@@ -106,6 +108,8 @@ std::vector<char*> TraceRetriever::getPlan(GameEncoder* encoder, Instance *insta
 		char* command = commandInstace->getStringValue(classIndex);
 		commands[i] = command;
 	}
+
+	log("End trace retriever end...\n");
 
 	return commands;
 }

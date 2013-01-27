@@ -77,6 +77,7 @@ class BuildOrderManager
     void spendResources(BWAPI::UnitType t);
     void spendResources(BWAPI::TechType t);
     void spendResources(BWAPI::UpgradeType t);
+	int  getPlanSize();
 
     int getPlannedCount(BWAPI::UnitType t);
     int getPlannedCount(BWAPI::UnitType t, int minPriority);

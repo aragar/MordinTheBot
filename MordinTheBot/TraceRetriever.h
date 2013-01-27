@@ -9,7 +9,7 @@
 class TraceRetriever
 {
 private:
-	std::vector<Instances*>		games;
+	std::vector<Instances*>*	games;
 	int							k;
 
 	static const double			e;
@@ -30,7 +30,7 @@ private:
 	Triple	chooseRandomly(GameEncoder* encoder, std::vector<Triple>& nearestGames);
 public:
 	// Constructors;
-	TraceRetriever(std::vector<Instances*> games, int k = 1);
+	TraceRetriever(std::vector<Instances*>* games, int k = 1);
 
 	// Methods;
 	std::vector<char*> getPlan(GameEncoder* encoder, Instance* instance, Filter* filter, int moves);

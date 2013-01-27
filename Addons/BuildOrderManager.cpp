@@ -1014,3 +1014,8 @@ void BuildOrderManager::debug(const char* text, ...)
     y+=15;
   }
 }
+
+int BuildOrderManager::getPlanSize()
+{
+	return (int)savedPlan.size();
+}

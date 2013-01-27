@@ -1,6 +1,8 @@
 #include "ArffReader.h"
 #include "Instances.h"
 
+#include "../Addons/Util.h"
+
 #include <vector>
 
 /* Creates an arff file reader. */
@@ -22,6 +24,7 @@ Instances* ArffReader::getData()
 /* Reads the specified arff file and creates the instances dataset. */
 void ArffReader::read()
 {
+	log("Start reading the arff file...\n");
 // Open the file;
 	FILE* arffFile;
 	arffFile = fopen(arffFileName, "r");
@@ -37,6 +40,7 @@ void ArffReader::read()
 	char* arffString = new char[fileSize + 1];
 	fread(arffString, 1, fileSize, arffFile);
 
+	log("Start parsing the arff file...\n");
 
 	char* line;
 	char* tmp;
@@ -159,6 +163,8 @@ void ArffReader::read()
 		line = strtok(arffString, "\n");
 		arffString = tmp;
 	}
+
+	log("End parsing the file...\n");
 
 	fclose(arffFile);
 	return;

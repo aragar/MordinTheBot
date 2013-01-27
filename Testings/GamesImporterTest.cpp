@@ -31,6 +31,7 @@ int main()
 	int index = rand() % game->numInstances();
 	Instance* instance = game->getInstance(index);
 	fprintf(file, "From trace %d instance %d was chosen\n", (int)instance->getValue(encoder->traceIndex), index);
+	printf("Start\n");
 
 	TraceRetriever* retriever = new TraceRetriever(games, 15);
 	std::vector<char*> commands = retriever->getPlan(encoder, instance, 
@@ -39,6 +40,8 @@ int main()
 	for (int i = 0; i < 10; ++i)
 		fprintf(file, "%d: %s\n", i+1, commands[i]);
 	fprintf(file, "\n");
+	printf("End\n");
+	getchar();
 
 	fclose(file);
 	return 0;
